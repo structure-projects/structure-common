@@ -116,21 +116,12 @@ public class ResultVO<T> implements Serializable {
 
     /**
      * 业务失败的构建
-     * @param subMsg 业务消息
-     * @return
-     */
-    public static ResultVO fail(String subMsg) {
-        return builder().code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg()).subCode(ResultCodeEnum.FAIL.getCode()).subMsg(subMsg).timestamp((new Date()).getTime()).build();
-    }
-
-    /**
-     * 业务失败的构建
      * @param subCode 业务code
      * @param subMsg 业务消息
      * @return
      */
     public static ResultVO fail(String subCode, String subMsg) {
-        return builder().code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg()).subCode(subCode).subMsg(subMsg).timestamp((new Date()).getTime()).data(null).build();
+        return builder().code(ResultCodeEnum.FAIL.getCode()).msg(ResultCodeEnum.FAIL.getMsg()).subCode(subCode).subMsg(subMsg).timestamp((new Date()).getTime()).data(null).build();
     }
 
     /**
@@ -140,17 +131,7 @@ public class ResultVO<T> implements Serializable {
      * @return
      */
     public static ResultVO fail(Integer subCode, String subMsg) {
-        return builder().code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg()).subCode(subCode + "").subMsg(subMsg).timestamp((new Date()).getTime()).data(null).build();
-    }
-
-    /**
-     * 业务失败但是仍然要返回数据
-     * @param subMsg 失败的消息
-     * @param data 返回的数据
-     * @return
-     */
-    public static ResultVO fail(String subMsg, Object data) {
-        return builder().code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg()).subCode(ResultCodeEnum.FAIL.getCode()).subMsg(subMsg).timestamp((new Date()).getTime()).data(data).build();
+        return builder().code(ResultCodeEnum.FAIL.getCode()).msg(ResultCodeEnum.FAIL.getMsg()).subCode(subCode + "").subMsg(subMsg).timestamp((new Date()).getTime()).data(null).build();
     }
 
     /**
@@ -177,6 +158,14 @@ public class ResultVO<T> implements Serializable {
 
     /**
      * 无权限的构建
+     * @return
+     */
+    public static ResultVO unauthorized() {
+        return builder().code(ResultCodeEnum.UNAUTHORIZED.getCode()).msg(ResultCodeEnum.UNAUTHORIZED.getMsg()).timestamp((new Date()).getTime()).build();
+    }
+
+    /**
+     * 无权限的构建
      * @param subCode
      * @param subMsg
      * @return
@@ -191,7 +180,7 @@ public class ResultVO<T> implements Serializable {
      * @return
      */
     public static ResultVO verificationFailed(List<VerificationFailedMsg> verificationFailedMsgList) {
-        return builder().code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg()).subCode(ResultCodeEnum.VERIFICATION_FAILED.getCode()).subMsg(ResultCodeEnum.VERIFICATION_FAILED.getMsg()).timestamp((new Date()).getTime()).data(verificationFailedMsgList).build();
+        return builder().code(ResultCodeEnum.VERIFICATION_FAILED.getCode()).msg(ResultCodeEnum.VERIFICATION_FAILED.getMsg()).timestamp((new Date()).getTime()).data(verificationFailedMsgList).build();
     }
 
     /**
@@ -199,7 +188,7 @@ public class ResultVO<T> implements Serializable {
      * @return
      */
     public static ResultVO notfound() {
-        return builder().code(ResultCodeEnum.FALLBACK.getCode()).msg(ResultCodeEnum.FALLBACK.getMsg()).subCode(ResultCodeEnum.NOT_FOUND.getCode()).subMsg(ResultCodeEnum.NOT_FOUND.getMsg()).timestamp((new Date()).getTime()).build();
+        return builder().code(ResultCodeEnum.NOT_FOUND.getCode()).msg(ResultCodeEnum.NOT_FOUND.getMsg()).timestamp((new Date()).getTime()).build();
     }
 
     /**
